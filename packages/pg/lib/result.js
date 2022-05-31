@@ -97,7 +97,7 @@ class Result {
     }
   }
 
-  addParams(paramDescription) {
+  addParams(paramDescriptions) {
     if (this.params.length) {
       this.params = []
     }
