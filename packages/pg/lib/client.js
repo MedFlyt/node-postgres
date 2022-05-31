@@ -190,6 +190,8 @@ class Client extends EventEmitter {
     con.on('rowDescription', this._handleRowDescription.bind(this))
     con.on('dataRow', this._handleDataRow.bind(this))
     con.on('portalSuspended', this._handlePortalSuspended.bind(this))
+    // delegate paramDescription to active query
+    con.on('paramDescription', this.activeQuery.handleParamDescription(this, con))
     con.on('emptyQuery', this._handleEmptyQuery.bind(this))
     con.on('commandComplete', this._handleCommandComplete.bind(this))
     con.on('parseComplete', this._handleParseComplete.bind(this))

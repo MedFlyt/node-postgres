@@ -17,6 +17,7 @@ class Query extends EventEmitter {
     this.types = config.types
     this.name = config.name
     this.binary = config.binary
+    this.describe = config.describe
     // use unique portal name each time
     this.portal = config.portal || ''
     this.callback = config.callback
@@ -36,6 +37,10 @@ class Query extends EventEmitter {
   requiresPreparation() {
     // named queries must always be prepared
     if (this.name) {
+      return true
+    }
+    // always prepare if describing a query
+    if (this.describe) {
       return true
     }
     // always prepare if there are max number of rows expected per
@@ -159,6 +164,10 @@ class Query extends EventEmitter {
     return null
   }
 
+  handleParamDescription(msg, con) {
+    this._result.addParams(msg.params)
+    con.sync()
+  }
   hasBeenParsed(connection) {
     return this.name && connection.parsedStatements[this.name]
   }
@@ -197,6 +206,15 @@ class Query extends EventEmitter {
       })
     }
 
+    if (this.describe) {
+      // if describe is set, the query is not executed
+      connection.describe({
+        type: 'S',
+        name: this.name,
+      })
+      connection.flush()
+      return
+    }
     // because we're mapping user supplied values to
     // postgres wire protocol compatible values it could
     // throw an exception, so try/catch this section
