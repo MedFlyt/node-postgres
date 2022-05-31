@@ -6,9 +6,11 @@
     "strict": true,
     "target": "es6",
     "noImplicitAny": true,
+    "noEmit": true,
     "moduleResolution": "node",
     "sourceMap": true,
     "outDir": "dist",
+    "incremental": true,
     "baseUrl": ".",
     "declaration": true,
     "paths": {
