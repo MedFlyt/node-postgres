@@ -359,15 +359,13 @@ class Client extends EventEmitter {
 
   _handleCommandComplete(msg) {
     // delegate commandComplete to active query
-    this.activeQuery.handleCommandComplete(msg, this.connection)
+    if (this.activeQuery !== null) this.activeQuery.handleCommandComplete(msg, this.connection)
   }
   _handleParamDescription(msg) {
     // if a prepared statement has a name and properly parses
     // we track that its already been executed so we don't parse
     // it again on the same client
-    console.log('msg')
-    console.log(msg)
-    this.activeQuery.handleParamDescription(msg, this.connection)
+    if (this.activeQuery !== null) this.activeQuery.handleParamDescription(msg, this.connection)
   }
   _handleParseComplete(msg) {
     // if a prepared statement has a name and properly parses

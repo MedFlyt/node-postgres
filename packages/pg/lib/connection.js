@@ -32,7 +32,6 @@ class Connection extends EventEmitter {
 
   connect(port, host) {
     var self = this
-
     this._connecting = true
     this.stream.setNoDelay(true)
     this.stream.connect(port, host)
