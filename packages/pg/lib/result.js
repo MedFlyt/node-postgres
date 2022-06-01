@@ -101,10 +101,8 @@ class Result {
     if (this.params.length) {
       this.params = []
     }
-    for (var i = 0; i < paramDescriptions.length; i++) {
-      var desc = paramDescriptions[i]
-      this.params.push(desc)
-    }
+    this.params.push(paramDescriptions)
+    console.log('this.params', this.params)
   }
 }
 module.exports = Result

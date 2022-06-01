@@ -191,7 +191,7 @@ class Client extends EventEmitter {
     con.on('dataRow', this._handleDataRow.bind(this))
     con.on('portalSuspended', this._handlePortalSuspended.bind(this))
     // delegate paramDescription to active query
-    con.on('paramDescription', this._handleParamDescription.bind(this))
+    con.on('parameterDescription', this._handleParamDescription.bind(this))
     con.on('emptyQuery', this._handleEmptyQuery.bind(this))
     con.on('commandComplete', this._handleCommandComplete.bind(this))
     con.on('parseComplete', this._handleParseComplete.bind(this))
@@ -365,6 +365,8 @@ class Client extends EventEmitter {
     // if a prepared statement has a name and properly parses
     // we track that its already been executed so we don't parse
     // it again on the same client
+    console.log('msg')
+    console.log(msg)
     this.activeQuery.handleParamDescription(msg, this.connection)
   }
   _handleParseComplete(msg) {

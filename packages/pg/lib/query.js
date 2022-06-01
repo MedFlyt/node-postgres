@@ -20,6 +20,7 @@ class Query extends EventEmitter {
     this.describe = config.describe
     // use unique portal name each time
     this.portal = config.portal || ''
+    this.params = config.params || []
     this.callback = config.callback
     this._rowMode = config.rowMode
     if (process.domain && config.callback) {
@@ -165,7 +166,9 @@ class Query extends EventEmitter {
   }
 
   handleParamDescription(msg, con) {
-    this._result.addParams(msg.params)
+    console.log('handleParamDescription')
+    console.log(msg)
+    this._result.addParams(msg)
     con.sync()
   }
   hasBeenParsed(connection) {
@@ -179,6 +182,7 @@ class Query extends EventEmitter {
   _getRows(connection, rows) {
     connection.execute({
       portal: this.portal,
+      params: this.params,
       rows: rows,
     })
     // if we're not reading pages of rows send the sync command
@@ -213,7 +217,7 @@ class Query extends EventEmitter {
         name: this.name,
       })
       connection.flush()
-      return
+      return this.handleParamDescription(this, connection)
     }
     // because we're mapping user supplied values to
     // postgres wire protocol compatible values it could

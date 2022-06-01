@@ -183,6 +183,22 @@ var suite = new helper.Suite()
     })
     assert.equal(result.rows.length, 0)
   })
+  // suite.test('describe', async function (done) {
+  //   const res = await client.query(
+  //     new Query({ text: 'SELECT id, name, age FROM person WHERE age > $1', describe: true }, done)
+  //   )
+  //   console.log(res)
+  //   console.log(res._result)
+  //   assert.deepEqual(res.params, [])
+  //   assert.deepEqual(
+  //     res._result.fields.map((field) => ({ name: field.name, type: field.dataTypeID })),
+  //     [
+  //       { name: 'id', type: 23 },
+  //       { name: 'name', type: 1043 },
+  //       { name: 'age', type: 23 },
+  //     ]
+  //   )
+  // })
 
   suite.test('cleanup', () => client.end())
 })()
@@ -197,8 +213,9 @@ var suite = new helper.Suite()
           text: 'SELECT id, name, age FROM person WHERE age > $1',
           describe: true,
         },
-        (res) => {
-          assert.deepEqual(res.params, [23])
+        (er, res) => {
+          console.error(er);
+          assert.deepEqual(res.params[0].dataTypeIDs, [23])
           assert.deepEqual(
             res.fields.map((field) => ({ name: field.name, type: field.dataTypeID })),
             [

@@ -5,7 +5,8 @@ build/
 node_modules/
 package-lock.json
 *.swp
-dist
+dist/
+packages/pg-protocol/dist/
 .DS_Store
 .vscode/
 manually-test-on-heroku.js
