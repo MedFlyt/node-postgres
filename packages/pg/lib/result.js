@@ -98,7 +98,11 @@ class Result {
   }
 
   addParams(paramDescriptions) {
+    if (this.params == null || !this.params.length) {
+      this.params = []
+    }
     this.params.push(paramDescriptions)
+    this.params = Set(this.params)
   }
 }
 module.exports = Result
