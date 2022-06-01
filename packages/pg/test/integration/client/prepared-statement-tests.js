@@ -205,30 +205,30 @@ var suite = new helper.Suite()
 ;(function () {
   var client = helper.client()
   client.on('drain', client.end.bind(client))
-
-  suite.test('describe', function (done) {
-    client.query(
-      new Query(
-        {
-          text: 'SELECT id, name, age FROM person WHERE age > $1',
-          describe: true,
-        },
-        (er, res) => {
-          console.error(er);
-          assert.deepEqual(res.params[0].dataTypeIDs, [23])
-          assert.deepEqual(
-            res.fields.map((field) => ({ name: field.name, type: field.dataTypeID })),
-            [
-              { name: 'id', type: 23 },
-              { name: 'name', type: 1043 },
-              { name: 'age', type: 23 },
-            ]
-          )
-          done()
-        }
+  if (!helper.config.native) {
+    suite.test('describe', function (done) {
+      client.query(
+        new Query(
+          {
+            text: 'SELECT id, name, age FROM person WHERE age > $1',
+            describe: true,
+          },
+          (er, res) => {
+            console.error(er)
+            assert.deepEqual(res.params[0].dataTypeIDs, [23])
+            assert.deepEqual(
+              res.fields.map((field) => ({ name: field.name, type: field.dataTypeID })),
+              [
+                { name: 'id', type: 23 },
+                { name: 'name', type: 1043 },
+                { name: 'age', type: 23 },
+              ]
+            )
+            done()
+          }
+        )
       )
-    )
-  })
-
+    })
+  }
   suite.test('cleanup', () => client.end())
 })()
