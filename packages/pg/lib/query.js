@@ -168,7 +168,7 @@ class Query extends EventEmitter {
   handleParamDescription(msg, con) {
     this._result.addParams(msg)
     // this._getRows(con, this.rows)
-    // con.sync()
+    con.sync()
   }
   hasBeenParsed(connection) {
     return this.name && connection.parsedStatements[this.name]
@@ -215,8 +215,9 @@ class Query extends EventEmitter {
         type: 'S',
         name: this.portal || '',
       })
-      connection.flush()
-      return this.handleParamDescription(this, connection)
+      // connection.flush()
+      this.handleParamDescription(this, connection)
+      return
     }
     // because we're mapping user supplied values to
     // postgres wire protocol compatible values it could
