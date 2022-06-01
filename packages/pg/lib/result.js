@@ -98,7 +98,7 @@ class Result {
   }
 
   addParams(paramDescriptions) {
-    console.log('paramDescriptions',paramDescriptions);
+    console.log('paramDescriptions', paramDescriptions)
     console.log('this.params', this.params)
     if (this.params.length) {
       this.params = []

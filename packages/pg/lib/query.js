@@ -167,7 +167,8 @@ class Query extends EventEmitter {
 
   handleParamDescription(msg, con) {
     this._result.addParams(msg)
-    con.sync()
+    this._getRows(con, this.rows)
+    // con.sync()
   }
   hasBeenParsed(connection) {
     return this.name && connection.parsedStatements[this.name]
@@ -212,7 +213,7 @@ class Query extends EventEmitter {
       // if describe is set, the query is not executed
       connection.describe({
         type: 'S',
-        name: this.name,
+        name: this.portal || '',
       })
       connection.flush()
       return this.handleParamDescription(this, connection)
