@@ -167,7 +167,7 @@ class Query extends EventEmitter {
 
   handleParamDescription(msg, con) {
     this._result.addParams(msg)
-    this._getRows(con, this.rows)
+    // this._getRows(con, this.rows)
     // con.sync()
   }
   hasBeenParsed(connection) {
