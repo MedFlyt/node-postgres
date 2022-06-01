@@ -98,9 +98,10 @@ class Result {
   }
 
   addParams(paramDescriptions) {
-    // if (this.params.length) {
-    //   this.params = []
-    // }
+    console.log('this.params', this.params)
+    if (this.params.length) {
+      this.params = []
+    }
     this.params.push(paramDescriptions)
     // console.log('this.params', this.params)
   }
