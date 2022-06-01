@@ -98,9 +98,6 @@ class Result {
   }
 
   addParams(paramDescriptions) {
-    if (this.params.length) {
-      this.params = []
-    }
     this.params.push(paramDescriptions)
   }
 }
