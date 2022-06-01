@@ -102,7 +102,6 @@ class Result {
       this.params = []
     }
     this.params.push(paramDescriptions)
-    console.log('this.params', this.params)
   }
 }
 module.exports = Result

@@ -166,8 +166,6 @@ class Query extends EventEmitter {
   }
 
   handleParamDescription(msg, con) {
-    console.log('handleParamDescription')
-    console.log(msg)
     this._result.addParams(msg)
     con.sync()
   }
