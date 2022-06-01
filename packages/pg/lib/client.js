@@ -339,7 +339,9 @@ class Client extends EventEmitter {
 
   _handleRowDescription(msg) {
     // delegate rowDescription to active query
-    this.activeQuery.handleRowDescription(msg)
+    if (this.activeQuery != null){
+      this.activeQuery.handleRowDescription(msg)
+    }
   }
 
   _handleDataRow(msg) {
